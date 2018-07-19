@@ -1,4 +1,4 @@
-.container-fluid{
+.headimage{
     width: 100%;
     height: 500px;
     background: url("Materials/shutterstoke.jpg") no-repeat;
@@ -147,6 +147,25 @@ hr{
   .adv{
     margin-left: 5%;
     margin-right: 5%;  
+  }
+  .gray{
+      background-color: rgba(175, 187, 196, 0.151);
+      padding-top: 60px;
+  }
+
+  .previousbutton1{
+    margin-left: -90px;
+    height: 20%;
+    margin-top: 10%;
+  }
+  .nextbutton1{
+    margin-right: -110px;
+    height: 20%;
+    margin-top: 10%;
+  }
+  .logos{
+    height: 118px;
+    width: 100%;
   }
 
 
