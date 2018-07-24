@@ -178,22 +178,16 @@ hr{
 
 }
 #slider_box>ul {
-    overflow: hidden;
+    /*overflow: hidden;*/
     width: 1000%;
     height: 300px;
-    margin-left: -403px;
+    margin-left: -0px;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     transition: all 0.5s ease;
     
 }
 
-#slider_box {
-    overflow: hidden;
-    position: relative;
-    width: 850px;
-    min-width: 848px;
-}
 
 
 #nav_slider>div {
@@ -247,6 +241,35 @@ a {
     text-decoration: none;
     background-color: transparent;
     -webkit-text-decoration-skip: objects;
+  }
+
+  #slider_box {
+    overflow: hidden;
+    position: relative;
+    width: 850px;
+    min-width: 848px;
+}
+
+  .def{
+      width: 45%;
+      position: absolute;
+      left: -400px;
+      transition: all 0.5s ease;
+  }
+  .maxh{
+      height: 290px;
+  }
+  .def.active1{
+    width: 45%;
+    position: absolute;
+    left: 40px;
+    transition: all 0.5s ease;
+  }
+  .def.active2{
+    width: 45%;
+    position: absolute;
+    left: 460px;
+    transition: all 0.5s ease;
   }
 
 
