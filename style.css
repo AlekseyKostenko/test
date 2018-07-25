@@ -257,6 +257,15 @@ a {
   .rightpoz{
     margin-left: -5239px;
   }
+  .topWindow{ 
+      position: fixed; 
+      top: 0; 
+      z-index:9999;
+      max-width: 831px;
+      padding-left: 15px;
+      padding-right: 15px;
+  }
+  
 
 
 
