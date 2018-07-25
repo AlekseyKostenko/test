@@ -3,58 +3,90 @@ $('.carousel').carousel({
 })
 
 function Slider(){
-    var col_main_left=-403;
+    var numLi = $(".list").length -2;               // количество элементов без 2х клонов                   
+    var $img = $("#slider_box>ul>li");
+    var imgWidth = parseInt($img.css("width"));              // ширина изображения
+    var imgMargin =parseInt($img.css("margin-left"));        // Отступы от изображения
+    imgWidth = imgWidth + imgMargin*2;                       // Шаг слайдера
+    var colMainLeft=-imgWidth;
+    var pozRight = numLi*imgWidth;                    // Крайняя правая позиция
+    var pozRightPrev = (numLi-1) * imgWidth;          // Позиция перед крайней правой
+    var $sliderBox = $("#slider_box>ul");
     $("#right_nav").click(function(){
-        if(col_main_left!==-4836){
-            col_main_left = col_main_left-403;
-            $("#slider_box>ul").removeClass("animoff").addClass("anim");
-            $("#slider_box>ul").css("margin-left",col_main_left+"px");
-        } else if (col_main_left==-4836) {
-            col_main_left = col_main_left-403;
-            $("#slider_box>ul").removeClass("animoff").addClass("anim");
-            $("#slider_box>ul").css("margin-left",col_main_left+"px");
+        if(colMainLeft!==-pozRightPrev){
+            colMainLeft = colMainLeft-imgWidth;
+            $sliderBox.removeClass("animoff").addClass("anim");
+            $sliderBox.css("margin-left",colMainLeft+"px");
+        } else if (colMainLeft==-pozRightPrev) {
+            colMainLeft = colMainLeft-imgWidth;
+            $sliderBox.removeClass("animoff").addClass("anim");
+            $sliderBox.css("margin-left",colMainLeft+"px");
 
             setTimeout(function(){
-            col_main_left = 0;
-            $("#slider_box>ul").removeClass("anim").addClass("animoff");
-            $("#slider_box>ul").css("margin-left",col_main_left+"px");
+            colMainLeft = 0;
+            $sliderBox.removeClass("anim").addClass("animoff");
+            $sliderBox.css("margin-left",colMainLeft+"px");
             },500)
         }
-
     })
 
     $("#left_nav").click(function(){
-        if(col_main_left!==-403){
-            col_main_left = col_main_left+403;
-            $("#slider_box>ul").removeClass("animoff").addClass("anim");
-            $("#slider_box>ul").css("margin-left",col_main_left+"px")
-        } else if (col_main_left==-403) {  
-            col_main_left = col_main_left+403;
-            $("#slider_box>ul").removeClass("animoff").addClass("anim");
-            $("#slider_box>ul").css("margin-left",col_main_left+"px");
+        if(colMainLeft!==-imgWidth){
+            colMainLeft = colMainLeft+imgWidth;
+            $sliderBox.removeClass("animoff").addClass("anim");
+            $sliderBox.css("margin-left",colMainLeft+"px")
+        } else if (colMainLeft==-imgWidth) {  
+            colMainLeft = colMainLeft+imgWidth;
+            $sliderBox.removeClass("animoff").addClass("anim");
+            $sliderBox.css("margin-left",colMainLeft+"px");
 
             setTimeout(function(){
-                col_main_left=-5239;
-                $("#slider_box>ul").removeClass("anim").addClass("animoff");
-                $("#slider_box>ul").css("margin-left",col_main_left+"px");
+                colMainLeft=-pozRight;
+                $sliderBox.removeClass("anim").addClass("animoff");
+                $sliderBox.css("margin-left",colMainLeft+"px");
             },500)  
         }
-       // $("#slider_box>ul").css("margin-left",col_main_left+"px");
+       // $sliderBox.css("margin-left",colMainLeft+"px");
     })
 }
-$(Slider());
+Slider();
 
 
 function HeadTop (){ 
-    var headblock = $("#headblock"); //Получаем нужный объект var
-    topOfheadblock = $(headblock).offset().top; //Получаем начальное расположение нашего блока 
+    var $headBlock = $("#headblock"); //Получаем нужный объект var
+    var topOfheadBlock = $headBlock.offset().top; //Получаем начальное расположение нашего блока 
     $(window).scroll(function () { var windowScroll = $(window).scrollTop(); //Получаем величину, показывающую на сколько прокручено окно 
-        if (windowScroll > topOfheadblock){ // Если прокрутили больше, чем расстояние до блока, то приклеиваем его
-            $(headblock).removeClass("col-sm-12").addClass("topWindow"); 
+        if (windowScroll > topOfheadBlock){ // Если прокрутили больше, чем расстояние до блока, то приклеиваем его
+            $headBlock.removeClass("col-sm-12").addClass("topWindow"); 
         } else {
-            $(headblock).removeClass("topWindow").addClass("col-sm-12");
+            $headBlock.removeClass("topWindow").addClass("col-sm-12");
         };      
     });
 };
 
-$(HeadTop());
+HeadTop();
+
+function Checkbox(){
+    var Check1Num = 0;
+    var Check2Num = 0;
+    $("#ch1").click(function(){
+        if(Check1Num==1){
+            $("#chh1").removeClass("check1");
+            Check1Num=0;
+        } else {
+            $("#chh1").addClass("check1");
+            Check1Num=1;
+        }
+
+    })
+    $("#ch2").click(function(){
+        if(Check2Num==1){
+            $("#chh2").removeClass("check2");
+            Check2Num=0;
+        } else {
+            $("#chh2").addClass("check2");
+            Check2Num=1;
+        }
+    })
+}
+Checkbox();
