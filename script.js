@@ -8,44 +8,40 @@ var slider = (function(){
     var imgMargin =parseInt($img.css("margin-left"));                                 // Отступы от изображения
     var imgWidth = (parseInt($img.css("width"))) + imgMargin*2;                       // Шаг слайдера
     var colMainLeft=-imgWidth;
-    var pozRight = numLi*imgWidth;                                                    // Крайняя правая позиция      
+    var pozRight = -numLi*imgWidth;                                                    // Крайняя правая позиция      
     var $sliderBox = $("#slider_box>ul");
-    var rightNav = function(){
-        colMainLeft = colMainLeft-imgWidth;
+    
+    var nav = function(leftWidth, edge){
+        colMainLeft = colMainLeft+leftWidth;
         $sliderBox.removeClass("animoff").addClass("anim");
         $sliderBox.css("margin-left",colMainLeft+"px");
-        if(colMainLeft==-pozRight){
+
+        if(colMainLeft==edge){
             setTimeout(function(){
-            colMainLeft = 0;
-            $sliderBox.removeClass("anim").addClass("animoff");
-            $sliderBox.css("margin-left",colMainLeft+"px");
-            },500)
+                colMainLeft=pozRight -edge;
+                $sliderBox.removeClass("anim").addClass("animoff");
+                $sliderBox.css("margin-left",colMainLeft+"px");
+            },500);
         }
+    }
+
+    var rightNav = function(){
+        nav(-imgWidth, pozRight);
     }
     var leftNav = function(){
-        colMainLeft = colMainLeft+imgWidth;
-        $sliderBox.removeClass("animoff").addClass("anim");
-        $sliderBox.css("margin-left",colMainLeft+"px")
-        if(colMainLeft==0){
-            setTimeout(function(){
-            colMainLeft=-pozRight;
-            $sliderBox.removeClass("anim").addClass("animoff");
-            $sliderBox.css("margin-left",colMainLeft+"px");
-            },500) 
-        }
+        nav(imgWidth, 0);
+    }
+    var init = function(){
+
+        $("#right_nav").click(rightNav);
+        $("#left_nav").click(leftNav);
     }
     return{
-        next: function(){
-            rightNav();
-        },
-        prev: function(){
-            leftNav();
-        }
+        init: init
     };
-})();
+}());
 
-$("#right_nav").click(slider.next);
-$("#left_nav").click(slider.prev);
+slider.init();
 
 
 
@@ -115,27 +111,27 @@ function HeadTop (){
 
 HeadTop();
 
-function Checkbox(){
-    var Check1Num = 0;
-    var Check2Num = 0;
-    $("#ch1").click(function(){
-        if(Check1Num==1){
-            $("#chh1").removeClass("check1");
-            Check1Num=0;
+var checkbox = (function(){
+    var check = function(id){
+        if($(id).hasClass('check1')){
+            $(id).removeClass("check1");
         } else {
-            $("#chh1").addClass("check1");
-            Check1Num=1;
+            $(id).addClass("check1");
         }
+    }
+    var topBox = function(){
+        check("#chh1");
+    }
+    var bottomBox = function(){
+        check("#chh2");
+    }
+    var checkboxs = function(){
+        $("#ch1").click(topBox);
+        $("#ch2").click(bottomBox);
+    }
+    return{
+        cs: checkboxs
+    };
+})();
 
-    })
-    $("#ch2").click(function(){
-        if(Check2Num==1){
-            $("#chh2").removeClass("check2");
-            Check2Num=0;
-        } else {
-            $("#chh2").addClass("check2");
-            Check2Num=1;
-        }
-    })
-}
-Checkbox();
+checkbox.cs();
