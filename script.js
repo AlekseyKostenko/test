@@ -2,7 +2,55 @@ $('.carousel').carousel({
     interval: 9000000
 })
 
-function Slider(){
+var slider = (function(){
+    var numLi = $(".list").length -2;                                                 // количество элементов без 2х клонов                   
+    var $img = $("#slider_box>ul>li");
+    var imgMargin =parseInt($img.css("margin-left"));                                 // Отступы от изображения
+    var imgWidth = (parseInt($img.css("width"))) + imgMargin*2;                       // Шаг слайдера
+    var colMainLeft=-imgWidth;
+    var pozRight = numLi*imgWidth;                                                    // Крайняя правая позиция      
+    var $sliderBox = $("#slider_box>ul");
+    var rightNav = function(){
+        colMainLeft = colMainLeft-imgWidth;
+        $sliderBox.removeClass("animoff").addClass("anim");
+        $sliderBox.css("margin-left",colMainLeft+"px");
+        if(colMainLeft==-pozRight){
+            setTimeout(function(){
+            colMainLeft = 0;
+            $sliderBox.removeClass("anim").addClass("animoff");
+            $sliderBox.css("margin-left",colMainLeft+"px");
+            },500)
+        }
+    }
+    var leftNav = function(){
+        colMainLeft = colMainLeft+imgWidth;
+        $sliderBox.removeClass("animoff").addClass("anim");
+        $sliderBox.css("margin-left",colMainLeft+"px")
+        if(colMainLeft==0){
+            setTimeout(function(){
+            colMainLeft=-pozRight;
+            $sliderBox.removeClass("anim").addClass("animoff");
+            $sliderBox.css("margin-left",colMainLeft+"px");
+            },500) 
+        }
+    }
+    return{
+        next: function(){
+            rightNav();
+        },
+        prev: function(){
+            leftNav();
+        }
+    };
+})();
+
+$("#right_nav").click(slider.next);
+$("#left_nav").click(slider.prev);
+
+
+
+
+/*function Slider(){
     var numLi = $(".list").length -2;               // количество элементов без 2х клонов                   
     var $img = $("#slider_box>ul>li");
     var imgWidth = parseInt($img.css("width"));              // ширина изображения
@@ -12,6 +60,7 @@ function Slider(){
     var pozRight = numLi*imgWidth;                    // Крайняя правая позиция
     var pozRightPrev = (numLi-1) * imgWidth;          // Позиция перед крайней правой
     var $sliderBox = $("#slider_box>ul");
+    
     $("#right_nav").click(function(){
         if(colMainLeft!==-pozRightPrev){
             colMainLeft = colMainLeft-imgWidth;
@@ -49,7 +98,7 @@ function Slider(){
        // $sliderBox.css("margin-left",colMainLeft+"px");
     })
 }
-Slider();
+Slider();*/
 
 
 function HeadTop (){ 
