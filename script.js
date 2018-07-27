@@ -3,13 +3,13 @@ $('.carousel').carousel({
 })
 
 var slider = (function(){
-    var numLi = $(".list").length -2;                                                 // количество элементов без 2х клонов                   
-    var $img = $("#slider_box>ul>li");
-    var imgMargin =parseInt($img.css("margin-left"));                                 // Отступы от изображения
-    var imgWidth = (parseInt($img.css("width"))) + imgMargin*2;                       // Шаг слайдера
-    var colMainLeft=-imgWidth;
-    var pozRight = -numLi*imgWidth;                                                    // Крайняя правая позиция      
-    var $sliderBox = $("#slider_box>ul");
+    var numLi,                                                 // количество элементов без 2х клонов                   
+        $img,
+        imgMargin,                                 // Отступы от изображения
+        imgWidth,                       // Шаг слайдера
+        colMainLeft,
+        pozRight,                                                    // Крайняя правая позиция      
+        $sliderBox;
     
     var nav = function(leftWidth, edge){
         colMainLeft = colMainLeft+leftWidth;
@@ -32,6 +32,14 @@ var slider = (function(){
         nav(imgWidth, 0);
     }
     var init = function(){
+
+        numLi = $(".list").length-2;                                                 // количество элементов без 2х клонов                   
+        $img = $("#slider_box>ul>li");
+        imgMargin =parseInt($img.css("margin-left"));                                 // Отступы от изображения
+        imgWidth = (parseInt($img.css("width"))) + imgMargin*2;                       // Шаг слайдера
+        colMainLeft=-imgWidth;
+        pozRight = -numLi*imgWidth;                                                    // Крайняя правая позиция      
+        $sliderBox = $("#slider_box>ul");
 
         $("#right_nav").click(rightNav);
         $("#left_nav").click(leftNav);
@@ -111,27 +119,35 @@ function HeadTop (){
 
 HeadTop();
 
-var checkbox = (function(){
-    var check = function(id){
-        if($(id).hasClass('check1')){
-            $(id).removeClass("check1");
+var checkbox = (function() {
+    var checkboxes = [
+        {id: "ch1", state:0},
+        {id: "ch2", state:0}
+    ],
+    checkClass = "check1";
+
+    var check = function() {
+        var $self = $(this);
+        var id = $self.attr("id");
+        var check = checkboxes.find(function(item){ return item.id === id});
+        var $child = $self.children("div");
+        if(check.state === 1){
+            $child.removeClass(checkClass);
+            check.state = 0;
         } else {
-            $(id).addClass("check1");
+            $child.addClass(checkClass);
+            check.state = 1;
         }
     }
-    var topBox = function(){
-        check("#chh1");
-    }
-    var bottomBox = function(){
-        check("#chh2");
-    }
+
     var checkboxs = function(){
-        $("#ch1").click(topBox);
-        $("#ch2").click(bottomBox);
+        checkboxes.forEach(function(element) {
+            $("#" + element.id).click(check);
+        });
     }
     return{
-        cs: checkboxs
+        cb: checkboxs
     };
 })();
 
-checkbox.cs();
+checkbox.cb();
