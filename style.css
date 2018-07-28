@@ -67,9 +67,6 @@
   color: white;
   padding-top: 10px;
 }
-.editing :focus {
-  background-color: aqua;
-}
 span {
   width: 14px;
   height: 14px;
@@ -110,6 +107,35 @@ hr {
   margin-right: -80px;
   height: 20%;
   margin-top: 34%;
+}
+.prevv {
+  transform: rotate(45deg);
+  width: 30px;
+  height: 30px;
+  border: 3px solid black;
+  position: absolute;
+  bottom: 10px;
+}
+.prevvv {
+  border-top: none;
+  border-right: none;
+  left: 10px;
+  transform: rotate(45deg);
+  width: 30px;
+  height: 30px;
+  border: 3px solid black;
+  position: absolute;
+  bottom: 10px;
+}
+.prevvr {
+  border-bottom: none;
+  border-left: none;
+  transform: rotate(45deg);
+  width: 30px;
+  height: 30px;
+  border: 3px solid black;
+  position: absolute;
+  bottom: 10px;
 }
 .prevvv {
   transform: rotate(45deg);
@@ -161,7 +187,18 @@ hr {
   height: 118px;
   width: 100%;
 }
-#slider_box > ul > li {
+#slider_box {
+  overflow: hidden;
+  position: relative;
+  width: 850px;
+  min-width: 848px;
+}
+#slider_box ul {
+  width: 1000%;
+  height: 300px;
+  margin-left: -403px;
+}
+#slider_box ul li {
   float: left;
   display: block;
   height: 215px;
@@ -169,18 +206,6 @@ hr {
   margin-right: 15px;
   margin-left: 15px;
   transition: all 0.5s ease;
-}
-#slider_box > ul {
-  overflow: hidden;
-  width: 1000%;
-  height: 300px;
-  margin-left: -403px;
-}
-#slider_box {
-  overflow: hidden;
-  position: relative;
-  width: 850px;
-  min-width: 848px;
 }
 #nav_slider > div {
   width: 40px;
