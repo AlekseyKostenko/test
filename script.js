@@ -122,7 +122,7 @@ HeadTop();
 var checkbox = (function() {
     var checkboxes = [
         {id: "ch1", state:0},
-        {id: "ch2", state:0}
+        {id: "ch2", state:0, check:true}
     ],
     checkClass = "check1";
 
@@ -131,12 +131,19 @@ var checkbox = (function() {
         var id = $self.attr("id");
         var check = checkboxes.find(function(item){ return item.id === id});
         var $child = $self.children("div");
+        
         if(check.state === 1){
             $child.removeClass(checkClass);
             check.state = 0;
+            if (check.check){
+                $("#buttonEditing").addClass("colorOrange");
+            }
         } else {
             $child.addClass(checkClass);
             check.state = 1;
+            if (check.check){
+                $("#buttonEditing").removeClass("colorOrange");
+            }
         }
     }
 
@@ -149,5 +156,16 @@ var checkbox = (function() {
         cb: checkboxs
     };
 })();
-
 checkbox.cb();
+
+
+//function num() {
+  //  var numb = 0;
+   // numb = checkbox.attr("state");
+   // numb = numb + numb;
+   // alert(numb);
+   // if(1 == 1){
+   //     $("#buttonEditing").addClass("colorLightOrange");
+   // }
+//}
+//num();

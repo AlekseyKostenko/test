@@ -5980,7 +5980,7 @@ button.close {
   margin-left: 8px;
   text-indent: -999px;
   cursor: pointer;
-  background-color: #f26341;
+  background-color: @orange;
   border-radius: 4px;
   vertical-align: middle;
 }
@@ -6006,7 +6006,7 @@ button.close {
 }
 
 .carousel-indicators .active {
-  background-color: #f26341;
+  background-color: @orange;
   width: 12px;
   height: 12px;
   border-radius: 6px;
